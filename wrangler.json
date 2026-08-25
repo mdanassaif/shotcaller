@@ -1,0 +1,16 @@
+{
+  "name": "shotcaller",
+  "main": "src/index.ts",
+  "compatibility_date": "2026-08-01",
+  "compatibility_flags": ["nodejs_compat"],
+  "assets": { "directory": "web/dist" },
+  "routes": [{ "pattern": "shotcaller.workerscando.com", "custom_domain": true }],
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "portfolio",
+      "database_id": "d0e567a2-94c3-4944-98b7-f4147e875596",
+      "migrations_dir": "migrations"
+    }
+  ]
+}

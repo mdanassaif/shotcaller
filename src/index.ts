@@ -6,10 +6,20 @@ import { accounts, projects } from "./db/schema";
 import { TOOLS, callTool, catalog, type Ctx } from "./tools";
 import { allocate, flags, recommend, type Project } from "./triage";
 
-type Env = { DB: D1Database };
+type Env = { DB: D1Database; ASSETS: Fetcher };
 type Vars = { ctx: Ctx };
 
 const app = new Hono<{ Bindings: Env; Variables: Vars }>();
+
+// Force HTTPS in production; localhost (wrangler dev) stays on http.
+app.use("*", async (c, next) => {
+  const url = new URL(c.req.url);
+  if (url.protocol === "http:" && url.hostname !== "localhost" && url.hostname !== "127.0.0.1") {
+    url.protocol = "https:";
+    return c.redirect(url.toString(), 301);
+  }
+  await next();
+});
 
 /** Fallback only. Clients on the 2026-07-28 spec send their own in MCP-Protocol-Version. */
 const PROTOCOL_FALLBACK = "2026-07-28";
@@ -141,6 +151,8 @@ app.patch("/v1/settings", auth, async (c) => {
   return c.json({ weeklyHours: hours });
 });
 
-// GET / and static files are served by Workers Assets from web/dist (see wrangler.json).
+// Everything else falls through to the static board (web/dist). run_worker_first
+// routes all requests here so the https redirect above covers the board too.
+app.all("*", (c) => c.env.ASSETS.fetch(c.req.raw));
 
 export default app;

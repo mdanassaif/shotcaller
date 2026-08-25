@@ -3,7 +3,7 @@
   "main": "src/index.ts",
   "compatibility_date": "2026-08-01",
   "compatibility_flags": ["nodejs_compat"],
-  "assets": { "directory": "web/dist" },
+  "assets": { "directory": "web/dist", "binding": "ASSETS", "run_worker_first": true },
   "routes": [{ "pattern": "shotcaller.workerscando.com", "custom_domain": true }],
   "d1_databases": [
     {

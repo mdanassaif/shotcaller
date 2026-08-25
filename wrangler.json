@@ -9,7 +9,7 @@
     {
       "binding": "DB",
       "database_name": "portfolio",
-      "database_id": "d0e567a2-94c3-4944-98b7-f4147e875596",
+      "database_id": "b7f286a9-9772-4e3c-bc7c-98d7a7c591d8",
       "migrations_dir": "migrations"
     }
   ]

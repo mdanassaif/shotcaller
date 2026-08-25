@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { createAccount, fetchPlan, setToken } from "@/lib/api";
 import { Wordmark } from "./wordmark";
+import { GithubLink } from "./github-link";
 
 const fadeUp = {
   initial: { opacity: 0, y: 8 },
@@ -98,6 +99,9 @@ export function Welcome({ onEntered }: { onEntered: () => void }) {
             </form>
           )}
           {error && <p className="mt-3 text-xs text-destructive">{error}</p>}
+          <div className="mt-5 flex justify-center">
+            <GithubLink />
+          </div>
         </motion.div>
       </div>
     </div>

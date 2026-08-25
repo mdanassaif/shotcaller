@@ -6,6 +6,7 @@ import { patchSettings, type Plan } from "@/lib/api";
 import { Wordmark } from "./wordmark";
 import { AddProjectDialog } from "./add-dialog";
 import { ConnectDialog } from "./connect-dialog";
+import { GithubLink } from "./github-link";
 
 function CapacityControl({ plan, onRefresh }: { plan: Plan | null; onRefresh: () => Promise<void> }) {
   const [editing, setEditing] = useState(false);
@@ -74,6 +75,7 @@ export function AppHeader({
       <div className="mx-auto flex max-w-[1360px] items-center gap-1 px-4 py-3 sm:gap-2 sm:px-6">
         <Wordmark />
         <div className="min-w-2 flex-1" />
+        <GithubLink className="hidden sm:inline-flex" />
         <CapacityControl plan={plan} onRefresh={onRefresh} />
         <ConnectDialog>
           <Button variant="ghost" size="sm" className="rounded-lg text-muted-foreground" title="Use this board from Claude">
